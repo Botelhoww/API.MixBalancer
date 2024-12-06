@@ -4,11 +4,11 @@ using MixBalancer.Domain.Interfaces;
 
 namespace MixBalancer.Application.Services.Players
 {
-    public class PlayerManagementService : IPlayerManagementService
+    public class PlayerService : IPlayerService
     {
         private readonly IPlayerRepository _playerRepository;
 
-        public PlayerManagementService(IPlayerRepository playerRepository)
+        public PlayerService(IPlayerRepository playerRepository)
         {
             _playerRepository = playerRepository;
         }

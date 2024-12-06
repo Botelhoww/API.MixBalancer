@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using MixBalancer.Application.Services;
 using MixBalancer.Application.Services.Players;
+using MixBalancer.Application.Services.Team;
 using MixBalancer.Domain.Interfaces;
 using MixBalancer.Infrastructure.Context;
 using MixBalancer.Infrastructure.Repositories;
@@ -19,6 +20,7 @@ namespace MixBalancer.Infrastructure.IoC
             // Repositórios
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPlayerRepository, PlayerRepository>();
+            services.AddScoped<ITeamRepository, TeamRepository>();
 
             // HttpClient configurado
             services.AddHttpClient("GamerClubApi", client =>
@@ -52,7 +54,8 @@ namespace MixBalancer.Infrastructure.IoC
         {
             // Configurar serviços de aplicação
             services.AddScoped<AuthService>();
-            services.AddScoped<IPlayerManagementService, PlayerManagementService>();
+            services.AddScoped<IPlayerService, PlayerService>();
+            services.AddScoped<ITeamService, TeamService>();
 
             return services;
         }

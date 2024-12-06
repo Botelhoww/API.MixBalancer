@@ -2,7 +2,7 @@
 
 namespace MixBalancer.Application.Services.Players
 {
-    public interface IPlayerManagementService
+    public interface IPlayerService
     {
         Task<ServiceResult> CreatePlayerAsync(CreatePlayerDto model);
         Task<ServiceResult<IEnumerable<PlayerResultDto>>> GetAllPlayersAsync();

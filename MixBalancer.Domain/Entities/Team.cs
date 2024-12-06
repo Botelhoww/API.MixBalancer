@@ -3,6 +3,8 @@
     public class Team
     {
         public Guid Id { get; set; }
+        public string Name { get; set; }
+
 
         // Relacionamento com Players
         public List<Player> Players { get; set; }

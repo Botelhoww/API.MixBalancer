@@ -6,11 +6,11 @@ namespace MixBalancer.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PlayerManagementController : ControllerBase
+    public class PlayerController : ControllerBase
     {
-        private readonly IPlayerManagementService _playerManagementService;
+        private readonly IPlayerService _playerManagementService;
 
-        public PlayerManagementController(IPlayerManagementService playerManagementService)
+        public PlayerController(IPlayerService playerManagementService)
         {
             _playerManagementService = playerManagementService;
         }
