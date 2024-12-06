@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{48A226DF-7606-431F-983C-97D59B1BC5A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{217FE35D-4411-467E-AC5D-B58A2307325D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MixBalancer.API", "MixBalancer.API\MixBalancer.API.csproj", "{6F8122C0-B3FE-4E39-9787-DC398B5E9C78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MixBalancer.Application", "MixBalancer.Application\MixBalancer.Application.csproj", "{CA755338-BF98-4CA8-BDC4-9174A6FCF339}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MixBalancer.Domain", "MixBalancer.Domain\MixBalancer.Domain.csproj", "{C429C0B6-7199-4A74-8EEF-1CAEBE61670F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MixBalancer.Infrastructure", "MixBalancer.Infrastructure\MixBalancer.Infrastructure.csproj", "{D474094D-CF43-4A95-B4F2-DD1C659C11EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MixBalancer.UnitTests", "MixBalancer.UnitTests\MixBalancer.UnitTests.csproj", "{A4B351B1-4E32-43B5-A480-656A4FC04F50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MixBalancer.IntegrationTests", "MixBalancer.IntegrationTests\MixBalancer.IntegrationTests.csproj", "{D3101F78-771C-42F3-B4AB-04984F96C688}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F8122C0-B3FE-4E39-9787-DC398B5E9C78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F8122C0-B3FE-4E39-9787-DC398B5E9C78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F8122C0-B3FE-4E39-9787-DC398B5E9C78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F8122C0-B3FE-4E39-9787-DC398B5E9C78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA755338-BF98-4CA8-BDC4-9174A6FCF339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA755338-BF98-4CA8-BDC4-9174A6FCF339}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA755338-BF98-4CA8-BDC4-9174A6FCF339}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA755338-BF98-4CA8-BDC4-9174A6FCF339}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C429C0B6-7199-4A74-8EEF-1CAEBE61670F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C429C0B6-7199-4A74-8EEF-1CAEBE61670F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C429C0B6-7199-4A74-8EEF-1CAEBE61670F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C429C0B6-7199-4A74-8EEF-1CAEBE61670F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D474094D-CF43-4A95-B4F2-DD1C659C11EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D474094D-CF43-4A95-B4F2-DD1C659C11EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D474094D-CF43-4A95-B4F2-DD1C659C11EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D474094D-CF43-4A95-B4F2-DD1C659C11EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4B351B1-4E32-43B5-A480-656A4FC04F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4B351B1-4E32-43B5-A480-656A4FC04F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4B351B1-4E32-43B5-A480-656A4FC04F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4B351B1-4E32-43B5-A480-656A4FC04F50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3101F78-771C-42F3-B4AB-04984F96C688}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3101F78-771C-42F3-B4AB-04984F96C688}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3101F78-771C-42F3-B4AB-04984F96C688}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3101F78-771C-42F3-B4AB-04984F96C688}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6F8122C0-B3FE-4E39-9787-DC398B5E9C78} = {48A226DF-7606-431F-983C-97D59B1BC5A9}
+		{CA755338-BF98-4CA8-BDC4-9174A6FCF339} = {48A226DF-7606-431F-983C-97D59B1BC5A9}
+		{C429C0B6-7199-4A74-8EEF-1CAEBE61670F} = {48A226DF-7606-431F-983C-97D59B1BC5A9}
+		{D474094D-CF43-4A95-B4F2-DD1C659C11EA} = {48A226DF-7606-431F-983C-97D59B1BC5A9}
+		{A4B351B1-4E32-43B5-A480-656A4FC04F50} = {217FE35D-4411-467E-AC5D-B58A2307325D}
+		{D3101F78-771C-42F3-B4AB-04984F96C688} = {217FE35D-4411-467E-AC5D-B58A2307325D}
+	EndGlobalSection
+EndGlobal
