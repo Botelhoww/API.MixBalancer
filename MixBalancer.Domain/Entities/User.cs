@@ -10,5 +10,9 @@
         public DateTime CreatedAt { get; set; }
         public DateTime? LastLoginAt { get; set; }
         public bool IsActive { get; set; }
+
+
+        // Relacionamento com Player
+        public Player Player { get; set; }
     }
 }

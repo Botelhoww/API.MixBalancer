@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MixBalancer.Infrastructure.Context;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixBalancer.Infrastructure.Migrations
 {
     [DbContext(typeof(MixBalancerContext))]
-    partial class MixBalancerContextModelSnapshot : ModelSnapshot
+    [Migration("20241206163530_AddPlayerEntity")]
+    partial class AddPlayerEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,13 +76,17 @@ namespace MixBalancer.Infrastructure.Migrations
                     b.Property<int>("SkillLevel")
                         .HasColumnType("integer");
 
+                    b.Property<Guid?>("TeamId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("TeamId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Players");
                 });
@@ -93,14 +100,9 @@ namespace MixBalancer.Infrastructure.Migrations
                     b.Property<decimal>("AverageSkillLevel")
                         .HasColumnType("numeric");
 
-                    b.Property<Guid?>("ManagedByUserId")
-                        .HasColumnType("uuid");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ManagedByUserId");
-
-                    b.ToTable("Teams");
+                    b.ToTable("Team");
                 });
 
             modelBuilder.Entity("MixBalancer.Domain.Entities.User", b =>
@@ -136,22 +138,10 @@ namespace MixBalancer.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Email")
+                        .IsUnique();
+
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("PlayerTeam", b =>
-                {
-                    b.Property<Guid>("PlayersId")
-                        .HasColumnType("uuid");
-
-                    b.Property<Guid>("TeamsId")
-                        .HasColumnType("uuid");
-
-                    b.HasKey("PlayersId", "TeamsId");
-
-                    b.HasIndex("TeamsId");
-
-                    b.ToTable("PlayerTeam");
                 });
 
             modelBuilder.Entity("MixBalancer.Domain.Entities.Match", b =>
@@ -161,15 +151,15 @@ namespace MixBalancer.Infrastructure.Migrations
                         .HasForeignKey("PlayerId");
 
                     b.HasOne("MixBalancer.Domain.Entities.Team", "TeamA")
-                        .WithMany("MatchesAsTeamA")
+                        .WithMany()
                         .HasForeignKey("TeamAId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("MixBalancer.Domain.Entities.Team", "TeamB")
-                        .WithMany("MatchesAsTeamB")
+                        .WithMany()
                         .HasForeignKey("TeamBId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("TeamA");
@@ -179,38 +169,17 @@ namespace MixBalancer.Infrastructure.Migrations
 
             modelBuilder.Entity("MixBalancer.Domain.Entities.Player", b =>
                 {
+                    b.HasOne("MixBalancer.Domain.Entities.Team", null)
+                        .WithMany("Players")
+                        .HasForeignKey("TeamId");
+
                     b.HasOne("MixBalancer.Domain.Entities.User", "User")
-                        .WithOne("Player")
-                        .HasForeignKey("MixBalancer.Domain.Entities.Player", "UserId")
+                        .WithMany()
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("MixBalancer.Domain.Entities.Team", b =>
-                {
-                    b.HasOne("MixBalancer.Domain.Entities.User", "ManagedByUser")
-                        .WithMany()
-                        .HasForeignKey("ManagedByUserId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
-                    b.Navigation("ManagedByUser");
-                });
-
-            modelBuilder.Entity("PlayerTeam", b =>
-                {
-                    b.HasOne("MixBalancer.Domain.Entities.Player", null)
-                        .WithMany()
-                        .HasForeignKey("PlayersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MixBalancer.Domain.Entities.Team", null)
-                        .WithMany()
-                        .HasForeignKey("TeamsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("MixBalancer.Domain.Entities.Player", b =>
@@ -220,15 +189,7 @@ namespace MixBalancer.Infrastructure.Migrations
 
             modelBuilder.Entity("MixBalancer.Domain.Entities.Team", b =>
                 {
-                    b.Navigation("MatchesAsTeamA");
-
-                    b.Navigation("MatchesAsTeamB");
-                });
-
-            modelBuilder.Entity("MixBalancer.Domain.Entities.User", b =>
-                {
-                    b.Navigation("Player")
-                        .IsRequired();
+                    b.Navigation("Players");
                 });
 #pragma warning restore 612, 618
         }

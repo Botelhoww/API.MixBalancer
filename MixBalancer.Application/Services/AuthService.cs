@@ -12,12 +12,14 @@ namespace MixBalancer.Application.Services
     public class AuthService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IPlayerRepository _playerRepository;
         private readonly IConfiguration _configuration;
 
-        public AuthService(IUserRepository userRepository, IConfiguration configuration)
+        public AuthService(IUserRepository userRepository, IConfiguration configuration, IPlayerRepository playerRepository)
         {
             _userRepository = userRepository;
             _configuration = configuration;
+            _playerRepository = playerRepository;
         }
 
         public async Task<AuthResult> RegisterAsync(RegisterDto model)
@@ -38,6 +40,17 @@ namespace MixBalancer.Application.Services
             };
 
             await _userRepository.AddUserAsync(user);
+
+            //Criar o jogador associado ao usuário
+            var player = new Player
+            {
+                Id = Guid.NewGuid(),
+                UserId = user.Id,
+                Nickname = user.Username,
+                SkillLevel = 0
+            };
+
+            await _playerRepository.AddAsync(player);
 
             return AuthResult.Success(GenerateJwtToken(user));
         }
