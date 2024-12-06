@@ -8,6 +8,6 @@
 
     public class ServiceResult<T> : ServiceResult
     {
-        public T Players { get; set; }
+        public T Data { get; set; } // Renomeado para algo genérico
     }
 }

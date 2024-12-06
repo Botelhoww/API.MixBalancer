@@ -38,7 +38,7 @@ namespace MixBalancer.Application.Services.Players
                 SkillLevel = p.SkillLevel
             });
 
-            return new ServiceResult<IEnumerable<PlayerResultDto>> { IsSuccess = true, Players = result };
+            return new ServiceResult<IEnumerable<PlayerResultDto>> { IsSuccess = true, Data = result };
         }
 
         public async Task<ServiceResult> UpdatePlayerAsync(Guid id, UpdatePlayerDto model)

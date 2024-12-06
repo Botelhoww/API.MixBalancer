@@ -2,7 +2,6 @@
 using MixBalancer.Application.Dtos.Team;
 using MixBalancer.Application.Services;
 using MixBalancer.Application.Services.Team;
-using Newtonsoft.Json;
 
 namespace MixBalancer.API.Controllers
 {
@@ -35,7 +34,7 @@ namespace MixBalancer.API.Controllers
             if (!result.IsSuccess)
                 return BadRequest(new { message = result.ErrorMessage });
 
-            return Ok(result.Players);
+            return Ok(result.Data);
         }
 
         [HttpPut("teams/{id}")]

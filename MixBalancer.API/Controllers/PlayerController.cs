@@ -33,7 +33,7 @@ namespace MixBalancer.API.Controllers
         {
             var result = await _playerManagementService.GetAllPlayersAsync();
             return result.IsSuccess
-                ? Ok(result.Players)
+                ? Ok(result.Data)
                 : BadRequest(new { message = result.ErrorMessage });
         }
 

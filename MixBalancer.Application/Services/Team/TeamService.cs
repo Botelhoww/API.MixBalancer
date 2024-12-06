@@ -49,7 +49,7 @@ namespace MixBalancer.Application.Services.Team
                 ManagedByUserId = t.ManagedByUserId
             });
 
-            return new ServiceResult<IEnumerable<TeamResultDto>> { IsSuccess = true, Players = result };
+            return new ServiceResult<IEnumerable<TeamResultDto>> { IsSuccess = true, Data = result };
         }
 
         public async Task<ServiceResult> UpdateTeamAsync(Guid id, UpdateTeamDto model)

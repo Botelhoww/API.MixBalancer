@@ -21,6 +21,7 @@ namespace MixBalancer.Infrastructure.IoC
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             services.AddScoped<ITeamRepository, TeamRepository>();
+            services.AddScoped<IMatchRepository, MatchRepository>();
 
             // HttpClient configurado
             services.AddHttpClient("GamerClubApi", client =>
@@ -56,6 +57,7 @@ namespace MixBalancer.Infrastructure.IoC
             services.AddScoped<AuthService>();
             services.AddScoped<IPlayerService, PlayerService>();
             services.AddScoped<ITeamService, TeamService>();
+            services.AddScoped<IMatchService, MatchService>();
 
             return services;
         }

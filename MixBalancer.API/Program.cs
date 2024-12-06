@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+using MixBalancer.Infrastructure.Context;
 using MixBalancer.Infrastructure.IoC;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +24,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+using var scope = app.Services.CreateScope();
+var context = scope.ServiceProvider.GetRequiredService<MixBalancerContext>();
+context.Database.Migrate();
 
 app.UseHttpsRedirection();
 
