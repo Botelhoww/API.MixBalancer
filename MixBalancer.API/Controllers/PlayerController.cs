@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MixBalancer.Application.Dtos.Player;
 using MixBalancer.Application.Services.Players;
 
@@ -6,6 +7,7 @@ namespace MixBalancer.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class PlayerController : ControllerBase
     {
         private readonly IPlayerService _playerManagementService;

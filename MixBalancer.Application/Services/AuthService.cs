@@ -41,7 +41,6 @@ namespace MixBalancer.Application.Services
 
             await _userRepository.AddUserAsync(user);
 
-            //Criar o jogador associado ao usuário
             var player = new Player
             {
                 Id = Guid.NewGuid(),

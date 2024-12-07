@@ -1,4 +1,5 @@
 ﻿using MixBalancer.Application.Dtos.Team;
+using MixBalancer.Domain.Entities;
 
 namespace MixBalancer.Application.Services.Team
 {
@@ -10,5 +11,6 @@ namespace MixBalancer.Application.Services.Team
         Task<ServiceResult> DeleteTeamAsync(Guid id);
         Task<ServiceResult> AddPlayerToTeamAsync(Guid teamId, AddPlayerToTeamDto model);
         Task<ServiceResult> RemovePlayerFromTeamAsync(Guid teamId, RemovePlayerFromTeamDto model);
+        Task<ServiceResult<IEnumerable<TeamResultDto>>> GetMyTeamsAsync(Guid userId);
     }
 }

@@ -9,5 +9,7 @@ namespace MixBalancer.Domain.Interfaces
         Task AddAsync(Team team);
         Task UpdateAsync(Team team);
         Task DeleteAsync(Team team);
+
+        Task<IEnumerable<Team>> GetTeamsByUserIdAsync(Guid userId);
     }
 }

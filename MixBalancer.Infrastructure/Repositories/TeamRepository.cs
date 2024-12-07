@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MixBalancer.Application.Dtos.Team;
 using MixBalancer.Domain.Entities;
 using MixBalancer.Domain.Interfaces;
 using MixBalancer.Infrastructure.Context;
@@ -40,6 +41,13 @@ namespace MixBalancer.Infrastructure.Repositories
         {
             _context.Teams.Remove(team);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Team>> GetTeamsByUserIdAsync(Guid userId)
+        {
+            var myTeams = await _context.Teams.Include(t => t.Players).Where(t => t.ManagedByUserId == userId).ToListAsync();
+
+            return myTeams;
         }
     }
 }

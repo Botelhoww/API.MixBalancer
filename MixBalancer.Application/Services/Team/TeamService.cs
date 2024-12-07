@@ -108,5 +108,26 @@ namespace MixBalancer.Application.Services.Team
 
             return new ServiceResult { IsSuccess = true };
         }
+
+        public async Task<ServiceResult<IEnumerable<TeamResultDto>>> GetMyTeamsAsync(Guid userId)
+        {
+            var teams = await _teamRepository.GetTeamsByUserIdAsync(userId);
+
+            var result = teams.Select(t => new TeamResultDto
+            {
+                Id = t.Id,
+                Name = t.Name,
+                Players = t.Players.Select(p => new PlayerResultDto
+                {
+                    Id = p.Id,
+                    NickName = p.Nickname,
+                    SkillLevel = p.SkillLevel
+                }).ToList() ?? new List<PlayerResultDto>(),
+                AverageSkillLevel = t.AverageSkillLevel,
+                ManagedByUserId = t.ManagedByUserId
+            });
+
+            return new ServiceResult<IEnumerable<TeamResultDto>> { IsSuccess = true, Data = result };
+        }
     }
 }

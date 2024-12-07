@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MixBalancer.Application.Dtos.Team;
 using MixBalancer.Application.Services;
 using MixBalancer.Application.Services.Team;
+using System.Security.Claims;
 
 namespace MixBalancer.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TeamController : ControllerBase
     {
         private readonly ITeamService _teamService;
@@ -63,7 +66,9 @@ namespace MixBalancer.API.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
             var result = await _teamService.AddPlayerToTeamAsync(id, model);
+
             return result.IsSuccess
                 ? Ok(new { message = "Player added to team successfully" })
                 : BadRequest(new { message = result.ErrorMessage });
@@ -74,9 +79,23 @@ namespace MixBalancer.API.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
+
             var result = await _teamService.RemovePlayerFromTeamAsync(id, model);
+
             return result.IsSuccess
                 ? Ok(new { message = "Player removed from team successfully" })
+                : BadRequest(new { message = result.ErrorMessage });
+        }
+
+        [HttpGet("my-teams")]
+        public async Task<IActionResult> GetMyTeams()
+        {
+            var userId = Guid.Parse(User.Claims.First(c => c.Type == ClaimTypes.NameIdentifier).Value);
+
+            var result = await _teamService.GetMyTeamsAsync(userId);
+
+            return result.IsSuccess
+                ? Ok(result.Data)
                 : BadRequest(new { message = result.ErrorMessage });
         }
     }

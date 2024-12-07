@@ -91,6 +91,13 @@ namespace MixBalancer.Application.Services
         public async Task<ServiceResult> UpdateMatchAsync(Guid id, UpdateMatchDto model)
         {
             var match = await _matchRepository.GetByIdAsync(id);
+
+            if (model.Status == MatchStatus.Finished)
+                return new ServiceResult { IsSuccess = false, ErrorMessage = "Unable to update. Match is already finished." };
+
+            if (model.Status == MatchStatus.Cancelled)
+                return new ServiceResult { IsSuccess = false, ErrorMessage = "Unable to update. Match is cancelled." };
+
             if (match == null)
                 return new ServiceResult { IsSuccess = false, ErrorMessage = "Match not found." };
 

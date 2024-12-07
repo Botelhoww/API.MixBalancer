@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MixBalancer.Application.Dtos.Match;
 using MixBalancer.Application.DTOs;
 using MixBalancer.Application.Services;
@@ -8,6 +9,7 @@ namespace MixBalancer.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class MatchController : ControllerBase
     {
         private readonly IMatchService _matchService;
