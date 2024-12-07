@@ -67,7 +67,8 @@ namespace MixBalancer.Application.Services
                         NickName = p.Nickname,
                         SkillLevel = p.SkillLevel
                     }).ToList(),
-                    AverageSkillLevel = match.TeamA.AverageSkillLevel
+                    AverageSkillLevel = match.TeamA.AverageSkillLevel,
+                    ManagedByUserId = match.TeamA.ManagedByUserId
                 },
                 TeamB = new TeamResultDto
                 {
@@ -79,7 +80,8 @@ namespace MixBalancer.Application.Services
                         NickName = p.Nickname,
                         SkillLevel = p.SkillLevel
                     }).ToList(),
-                    AverageSkillLevel = match.TeamB.AverageSkillLevel
+                    AverageSkillLevel = match.TeamB.AverageSkillLevel,
+                    ManagedByUserId = match.TeamB.ManagedByUserId
                 }
             };
 
@@ -121,13 +123,27 @@ namespace MixBalancer.Application.Services
                 {
                     Id = m.TeamA.Id,
                     Name = m.TeamA.Name,
-                    AverageSkillLevel = m.TeamA.AverageSkillLevel
+                    Players = m.TeamA.Players.Select(p => new PlayerResultDto
+                    {
+                        Id = p.Id,
+                        NickName = p.Nickname,
+                        SkillLevel = p.SkillLevel
+                    }).ToList(),
+                    AverageSkillLevel = m.TeamA.AverageSkillLevel,
+                    ManagedByUserId = m.TeamA.ManagedByUserId
                 },
                 TeamB = new TeamResultDto
                 {
                     Id = m.TeamB.Id,
                     Name = m.TeamB.Name,
-                    AverageSkillLevel = m.TeamB.AverageSkillLevel
+                    Players = m.TeamB.Players.Select(p => new PlayerResultDto
+                    {
+                        Id = p.Id,
+                        NickName = p.Nickname,
+                        SkillLevel = p.SkillLevel
+                    }).ToList(),
+                    AverageSkillLevel = m.TeamB.AverageSkillLevel,
+                    ManagedByUserId = m.TeamB.ManagedByUserId
                 }
             });
 
