@@ -44,7 +44,8 @@ builder.Services.AddSwaggerGen(c =>
 builder.Services
     .AddInfrastructure(builder.Configuration)
     .AddApplication()
-    .AddPersistence(builder.Configuration);
+    .AddPersistence(builder.Configuration)
+    .AddCorsTeste();
 
 var app = builder.Build();
 
@@ -54,6 +55,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowFrontend");
 
 app.UseHttpsRedirection();
 app.UseRouting();
