@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MixBalancer.Application.Dtos;
+using MixBalancer.Application.Dtos.Player;
+using MixBalancer.Application.Dtos.User;
 using MixBalancer.Domain.Entities;
 using MixBalancer.Domain.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
@@ -95,6 +97,19 @@ namespace MixBalancer.Application.Services
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public async Task<ServiceResult> GetUserAsync(string userEmail)
+        {
+            var user = await _userRepository.GetByEmailAsync(userEmail);
+
+            var result = new UserDto
+            {
+                Email = user.Email,
+                Username = user.Username
+            };
+
+            return new ServiceResult<UserDto> { IsSuccess = true, Data = result };
         }
     }
 }

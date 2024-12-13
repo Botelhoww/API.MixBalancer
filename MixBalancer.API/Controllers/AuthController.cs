@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MixBalancer.Application.Dtos;
+using MixBalancer.Application.Dtos.User;
 using MixBalancer.Application.Services;
+using System.Security.Claims;
 
 namespace MixBalancer.API.Controllers
 {
@@ -38,6 +40,18 @@ namespace MixBalancer.API.Controllers
 
             return result.IsSuccess
                 ? Ok(new { token = result.Token })
+                : Unauthorized(new { message = result.ErrorMessage });
+        }
+
+        [HttpGet("me")]
+        public async Task<IActionResult> MyInfos()
+        {
+            var userEmail = User.Claims.First(c => c.Type == ClaimTypes.Email).Value;
+
+            var result = await _authService.GetUserAsync(userEmail);
+
+            return result.IsSuccess
+                ? Ok(new { token = result })
                 : Unauthorized(new { message = result.ErrorMessage });
         }
     }
