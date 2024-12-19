@@ -1,4 +1,5 @@
-﻿using MixBalancer.Application.Dtos.Team;
+﻿using MixBalancer.Application.Dtos.Match;
+using MixBalancer.Application.Dtos.Team;
 using MixBalancer.Domain.Enums;
 
 namespace MixBalancer.Application.DTOs
@@ -13,5 +14,8 @@ namespace MixBalancer.Application.DTOs
 
         public TeamResultDto TeamA { get; set; }
         public TeamResultDto TeamB { get; set; }
+
+        // Novos campos para incluir as estatísticas
+        public Dictionary<Guid, PlayerStatsDto> PlayerStats { get; set; }
     }
 }

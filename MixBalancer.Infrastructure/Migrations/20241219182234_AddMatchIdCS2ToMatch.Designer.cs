@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MixBalancer.Infrastructure.Context;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MixBalancer.Infrastructure.Migrations
 {
     [DbContext(typeof(MixBalancerContext))]
-    partial class MixBalancerContextModelSnapshot : ModelSnapshot
+    [Migration("20241219182234_AddMatchIdCS2ToMatch")]
+    partial class AddMatchIdCS2ToMatch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,10 +45,10 @@ namespace MixBalancer.Infrastructure.Migrations
                     b.Property<Guid?>("PlayerId")
                         .HasColumnType("uuid");
 
-                    b.Property<int?>("ScoreTeamA")
+                    b.Property<int>("ScoreTeamA")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ScoreTeamB")
+                    b.Property<int>("ScoreTeamB")
                         .HasColumnType("integer");
 
                     b.Property<int>("Status")
@@ -104,37 +107,40 @@ namespace MixBalancer.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int?>("Aces")
+                    b.Property<int>("Aces")
                         .HasColumnType("integer");
 
                     b.Property<string>("BestMap")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("Clutches")
+                    b.Property<int>("Clutches")
                         .HasColumnType("integer");
 
-                    b.Property<double?>("HeadshotPercentage")
+                    b.Property<double>("HeadshotPercentage")
                         .HasColumnType("double precision");
 
-                    b.Property<double?>("KDRatio")
+                    b.Property<double>("KDRatio")
                         .HasColumnType("double precision");
 
                     b.Property<string>("Nickname")
+                        .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("SkillLevel")
+                    b.Property<int>("SkillLevel")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("TotalMatches")
+                    b.Property<int>("TotalMatches")
                         .HasColumnType("integer");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
-                    b.Property<double?>("WinRate")
+                    b.Property<double>("WinRate")
                         .HasColumnType("double precision");
 
                     b.Property<string>("WorstMap")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -187,15 +193,15 @@ namespace MixBalancer.Infrastructure.Migrations
                     b.Property<DateTime?>("LastLoginAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("PasswordHash")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Salt")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Username")
                         .IsRequired()
                         .HasColumnType("text");
 

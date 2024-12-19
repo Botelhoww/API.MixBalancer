@@ -29,7 +29,7 @@ namespace MixBalancer.Infrastructure.Repositories
             await _context.Players.AddAsync(player);
             await _context.SaveChangesAsync();
         }
-
+        
         public async Task UpdateAsync(Player player)
         {
             _context.Players.Update(player);

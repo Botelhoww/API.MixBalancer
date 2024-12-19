@@ -5,5 +5,6 @@
         public Guid TeamAId { get; set; }
         public Guid TeamBId { get; set; }
         public DateTime Date { get; set; }
+        public Guid ManagedByUserId { get; set; }  // Novo campo
     }
 }

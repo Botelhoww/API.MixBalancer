@@ -53,6 +53,11 @@ namespace MixBalancer.Infrastructure.Context
                 .WithMany()
                 .HasForeignKey(t => t.ManagedByUserId)
                 .OnDelete(DeleteBehavior.SetNull);
+
+            // Configuração do MatchIdCS2
+            modelBuilder.Entity<Match>()
+                .Property(m => m.MatchIdCS2)
+                .HasMaxLength(50);  // Definindo o tamanho máximo para o MatchIdCS2
         }
     }
 }

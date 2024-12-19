@@ -33,7 +33,7 @@ namespace MixBalancer.Application.Services
             var user = new User
             {
                 Id = Guid.NewGuid(),
-                Username = model.Username,
+                Name = model.Username,
                 Email = model.Email,
                 Salt = salt,
                 PasswordHash = BCrypt.Net.BCrypt.HashPassword(model.Password + salt),
@@ -47,7 +47,7 @@ namespace MixBalancer.Application.Services
             {
                 Id = Guid.NewGuid(),
                 UserId = user.Id,
-                Nickname = user.Username,
+                Nickname = user.Name,
                 SkillLevel = 0
             };
 
@@ -85,7 +85,7 @@ namespace MixBalancer.Application.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Name, user.Username)
+                new Claim(ClaimTypes.Name, user.Name)
             };
 
             var token = new JwtSecurityToken(
@@ -107,7 +107,7 @@ namespace MixBalancer.Application.Services
             {
                 Id = user.Id,
                 Email = user.Email,
-                Username = user.Username
+                Username = user.Name
             };
 
             return new ServiceResult<UserDto> { IsSuccess = true, Data = result };
