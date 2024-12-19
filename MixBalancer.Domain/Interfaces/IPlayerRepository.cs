@@ -9,5 +9,6 @@ namespace MixBalancer.Domain.Interfaces
         Task AddAsync(Player player);
         Task UpdateAsync(Player player);
         Task DeleteAsync(Player player);
+        Task<Guid> GetPlayerIdByUserId(Guid userId);
     }
 }

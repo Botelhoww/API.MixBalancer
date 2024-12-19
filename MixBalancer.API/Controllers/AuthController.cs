@@ -2,6 +2,7 @@
 using MixBalancer.Application.Dtos;
 using MixBalancer.Application.Dtos.User;
 using MixBalancer.Application.Services;
+using MixBalancer.Domain.Entities;
 using System.Security.Claims;
 
 namespace MixBalancer.API.Controllers
@@ -48,11 +49,13 @@ namespace MixBalancer.API.Controllers
         {
             var userEmail = User.Claims.First(c => c.Type == ClaimTypes.Email).Value;
 
-            var result = await _authService.GetUserAsync(userEmail);
+            ServiceResult<UserDto> result = await _authService.GetUserAsync(userEmail);
 
-            return result.IsSuccess
-                ? Ok(new { token = result })
-                : Unauthorized(new { message = result.ErrorMessage });
+            if (result.IsSuccess && result.Data != null)
+                return Ok(new { user = result.Data });
+
+            return Unauthorized(new { message = result.ErrorMessage });
         }
+
     }
 }

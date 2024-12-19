@@ -41,5 +41,13 @@ namespace MixBalancer.Infrastructure.Repositories
             _context.Players.Remove(player);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<Guid> GetPlayerIdByUserId(Guid userId)
+        {
+            return await _context.Players
+                .Where(p => p.UserId == userId)
+                .Select(p => p.Id)
+                .FirstOrDefaultAsync();
+        }
     }
 }

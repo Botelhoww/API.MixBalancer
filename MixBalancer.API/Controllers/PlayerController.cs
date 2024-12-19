@@ -59,5 +59,19 @@ namespace MixBalancer.API.Controllers
                 ? Ok(new { message = "Player deleted successfully" })
                 : BadRequest(new { message = result.ErrorMessage });
         }
+
+        /// <summary>
+        /// Retorna o perfil do jogador com estatísticas e histórico de partidas
+        /// </summary>
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetPlayerProfile([FromRoute] Guid id)
+        {
+            var result = await _playerManagementService.GetPlayerProfileAsync(id);
+
+            if (result == null)
+                return NotFound(new { message = "Player not found." });
+
+            return Ok(result);
+        }
     }
 }

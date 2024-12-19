@@ -12,6 +12,7 @@ namespace MixBalancer.Infrastructure.Context
         public DbSet<Player> Players { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Match> Matches { get; set; }
+        public DbSet<MatchHistory> MatchHistories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,6 +21,13 @@ namespace MixBalancer.Infrastructure.Context
                 .HasOne(p => p.User)
                 .WithOne(u => u.Player)
                 .HasForeignKey<Player>(p => p.UserId);
+
+            // Relacionamento Player -> MatchHistory (Um-para-Muitos)
+            modelBuilder.Entity<MatchHistory>()
+                .HasOne(mh => mh.Player)
+                .WithMany(p => p.MatchHistories)
+                .HasForeignKey(mh => mh.PlayerId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             // Relacionamento Team -> Players (Muitos-para-Muitos)
             modelBuilder.Entity<Team>()

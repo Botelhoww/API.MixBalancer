@@ -169,5 +169,22 @@ namespace MixBalancer.Application.Services
 
             return new ServiceResult { IsSuccess = true };
         }
+
+        public async Task<ServiceResult<IEnumerable<MatchHistoryDto>>> GetPlayerMatchHistory(Guid playerId)
+        {
+            var matchHistory = await _matchRepository.GetPlayerMatchHistory(playerId);
+            if (matchHistory == null)
+                return new ServiceResult<IEnumerable<MatchHistoryDto>> { IsSuccess = false, ErrorMessage = "Match History not found." };
+
+            var matchHistoryDto = matchHistory.Select(mh => new MatchHistoryDto
+            {
+                Date = mh.Date,
+                KD = mh.KD,
+                Map = mh.Map,
+                Result = mh.Result
+            });
+
+            return new ServiceResult<IEnumerable<MatchHistoryDto>> { IsSuccess = true, Data = matchHistoryDto };
+        }
     }
 }

@@ -99,12 +99,13 @@ namespace MixBalancer.Application.Services
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public async Task<ServiceResult> GetUserAsync(string userEmail)
+        public async Task<ServiceResult<UserDto>> GetUserAsync(string userEmail)
         {
             var user = await _userRepository.GetByEmailAsync(userEmail);
 
             var result = new UserDto
             {
+                Id = user.Id,
                 Email = user.Email,
                 Username = user.Username
             };

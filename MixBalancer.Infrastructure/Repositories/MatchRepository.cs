@@ -60,5 +60,12 @@ namespace MixBalancer.Infrastructure.Repositories
             _context.Matches.Remove(match);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<MatchHistory>> GetPlayerMatchHistory(Guid playerId)
+        {
+            return await _context.MatchHistories
+                .Where(mh => mh.PlayerId == playerId)
+                .ToListAsync();
+        }
     }
 }
